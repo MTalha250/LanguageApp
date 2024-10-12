@@ -6,23 +6,13 @@ import Feather from 'react-native-vector-icons/Feather';
 import HomeStackNavigation from './homeStackNavigation';
 import ActivityStackNavigation from './activityStackNavigation';
 import NotificationStackNavigation from './notificationsStackNavigation';
+import useAuthStore from '../store/authStore';
+
 const Tab = createBottomTabNavigator();
 
 const RootNavigator = () => {
-  //   const {user, setUser} = useAuthStore();
 
-  //   async function checkTokenAndLogin() {
-  //     const token = await AsyncStorage.getItem('token');
-  //     if (token) {
-  //       const res = await loginBack();
-  //       // console.log(res);
-  //       setUser(res.user);
-  //     }
-  //   }
-
-  //   useEffect(() => {
-  //     checkTokenAndLogin();
-  //   }, []);
+  const {user} = useAuthStore();
 
   return (
     <NavigationContainer>
@@ -36,7 +26,7 @@ const RootNavigator = () => {
         }}>
         <Tab.Screen
           name={'Home'}
-          component={HomeStackNavigation}
+          component={user ? HomeStackNavigation : LoginStackNavigation}
           options={{
             tabBarIcon: ({color}) => (
               <Feather name="home" size={25} color={color} />
@@ -46,8 +36,19 @@ const RootNavigator = () => {
         />
 
         <Tab.Screen
+          name={'Activity'}
+          component={user? ActivityStackNavigation : LoginStackNavigation}
+          options={{
+            tabBarIcon: ({color}) => (
+              <Feather name="activity" size={30} color={color} />
+            ),
+            headerShown: false,
+          }}
+        />
+
+        <Tab.Screen
           name={'Notifications'}
-          component={NotificationStackNavigation}
+          component={user? NotificationStackNavigation : LoginStackNavigation}
           options={{
             tabBarIcon: ({color}) => (
               <Feather name="bell" size={30} color={color} />
@@ -56,18 +57,8 @@ const RootNavigator = () => {
           }}
         />
         <Tab.Screen
-          name={'Activity'}
-          component={ActivityStackNavigation}
-          options={{
-            tabBarIcon: ({color}) => (
-              <Feather name="activity" size={30} color={color} />
-            ),
-            headerShown: false,
-          }}
-        />
-        <Tab.Screen
           name={'Account'}
-          component={LoginStackNavigation}
+          component={user? LoginStackNavigation : LoginStackNavigation}
           options={{
             tabBarIcon: ({color}) => (
               <Feather name="user" size={30} color={color} />

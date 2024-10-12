@@ -7,16 +7,16 @@ const NotificationsScreen = () => {
   return (
     <SafeAreaView className="flex-1 bg-white">
       <View className="p-4 border-b border-gray-200">
-        <Text className="text-xl font-bold text-center">Notifications</Text>
+        <Text className="text-xl font-bold text-center text-black">Notifications</Text>
       </View>
 
       <ScrollView className="px-6 py-4">
-        <Text className="text-lg font-semibold mb-2">Today</Text>
+        <Text className="text-lg font-semibold mb-2 text-black">Today</Text>
         <Card className="mb-2 rounded-lg bg-blue-100">
           <View className="py-4 px-6 flex-row items-center">
             <Icon name="chatbubble-outline" size={26} color="black" />
             <View className="ml-4">
-              <Text className="font-bold">New Word Learned!</Text>
+              <Text className="font-bold text-black">New Word Learned!</Text>
               <Text className="text-gray-600">
                 Your child just learned a new word: Papa! Keep up the great
                 progress.
@@ -29,7 +29,7 @@ const NotificationsScreen = () => {
           <View className="py-4 px-6 flex-row items-center">
             <Icon name="clipboard-outline" size={26} color="black" />
             <View className="ml-4">
-              <Text className="font-bold">Weekly Progress Report</Text>
+              <Text className="font-bold text-black">Weekly Progress Report</Text>
               <Text className="text-gray-600">
                 Your child has learned 5 new words this week! Check out their
                 vocabulary milestones.
@@ -42,59 +42,7 @@ const NotificationsScreen = () => {
           <View className="py-4 px-6 flex-row items-center">
             <Icon name="clipboard-outline" size={26} color="black" />
             <View className="ml-4">
-              <Text className="font-bold">Weekly Progress Report</Text>
-              <Text className="text-gray-600">
-                Your child has learned 5 new words this week! Check out their
-                vocabulary milestones.
-              </Text>
-            </View>
-          </View>
-        </Card>
-
-        <Card className="mb-2 rounded-lg bg-gray-100">
-          <View className="py-4 px-6 flex-row items-center">
-            <Icon name="chatbubble-outline" size={26} color="black" />
-            <View className="ml-4">
-              <Text className="font-bold">New Word Learned!</Text>
-              <Text className="text-gray-600">
-                Your child just learned a new word: Papa! Keep up the great
-                progress.
-              </Text>
-            </View>
-          </View>
-        </Card>
-        <Text className="text-lg font-semibold mb-2">Yesterday</Text>
-        <Card className="mb-2 rounded-lg bg-gray-100">
-          <View className="py-4 px-6 flex-row items-center">
-            <Icon name="chatbubble-outline" size={26} color="black" />
-            <View className="ml-4">
-              <Text className="font-bold">New Word Learned!</Text>
-              <Text className="text-gray-600">
-                Your child just learned a new word: Papa! Keep up the great
-                progress.
-              </Text>
-            </View>
-          </View>
-        </Card>
-
-        <Card className="mb-2 rounded-lg bg-gray-100">
-          <View className="py-4 px-6 flex-row items-center">
-            <Icon name="clipboard-outline" size={26} color="black" />
-            <View className="ml-4">
-              <Text className="font-bold">Weekly Progress Report</Text>
-              <Text className="text-gray-600">
-                Your child has learned 5 new words this week! Check out their
-                vocabulary milestones.
-              </Text>
-            </View>
-          </View>
-        </Card>
-
-        <Card className="mb-2 rounded-lg bg-gray-100">
-          <View className="py-4 px-6 flex-row items-center">
-            <Icon name="clipboard-outline" size={26} color="black" />
-            <View className="ml-4">
-              <Text className="font-bold">Weekly Progress Report</Text>
+              <Text className="font-bold text-black">Weekly Progress Report</Text>
               <Text className="text-gray-600">
                 Your child has learned 5 new words this week! Check out their
                 vocabulary milestones.
@@ -107,7 +55,7 @@ const NotificationsScreen = () => {
           <View className="py-4 px-6 flex-row items-center">
             <Icon name="chatbubble-outline" size={26} color="black" />
             <View className="ml-4">
-              <Text className="font-bold">New Word Learned!</Text>
+              <Text className="font-bold text-black">New Word Learned!</Text>
               <Text className="text-gray-600">
                 Your child just learned a new word: Papa! Keep up the great
                 progress.
@@ -115,6 +63,59 @@ const NotificationsScreen = () => {
             </View>
           </View>
         </Card>
+        <Text className="text-lg font-semibold mb-2 text-black">Yesterday</Text>
+        <Card className="mb-2 rounded-lg bg-gray-100">
+          <View className="py-4 px-6 flex-row items-center">
+            <Icon name="chatbubble-outline" size={26} color="black" />
+            <View className="ml-4">
+              <Text className="font-bold text-black">New Word Learned!</Text>
+              <Text className="text-gray-600">
+                Your child just learned a new word: Papa! Keep up the great
+                progress.
+              </Text>
+            </View>
+          </View>
+        </Card>
+
+        <Card className="mb-2 rounded-lg bg-gray-100">
+          <View className="py-4 px-6 flex-row items-center">
+            <Icon name="clipboard-outline" size={26} color="black" />
+            <View className="ml-4">
+              <Text className="font-bold text-black">Weekly Progress Report</Text>
+              <Text className="text-gray-600">
+                Your child has learned 5 new words this week! Check out their
+                vocabulary milestones.
+              </Text>
+            </View>
+          </View>
+        </Card>
+
+        <Card className="mb-2 rounded-lg bg-gray-100">
+          <View className="py-4 px-6 flex-row items-center">
+            <Icon name="clipboard-outline" size={26} color="black" />
+            <View className="ml-4">
+              <Text className="font-bold text-black">Weekly Progress Report</Text>
+              <Text className="text-gray-600">
+                Your child has learned 5 new words this week! Check out their
+                vocabulary milestones.
+              </Text>
+            </View>
+          </View>
+        </Card>
+
+        <Card className="mb-2 rounded-lg bg-gray-100">
+          <View className="py-4 px-6 flex-row items-center">
+            <Icon name="chatbubble-outline" size={26} color="black" />
+            <View className="ml-4">
+              <Text className="font-bold text-black">New Word Learned!</Text>
+              <Text className="text-gray-600">
+                Your child just learned a new word: Papa! Keep up the great
+                progress.
+              </Text>
+            </View>
+          </View>
+        </Card>
+        <Text> </Text>
       </ScrollView>
     </SafeAreaView>
   );

@@ -29,7 +29,7 @@ const WelcomeScreen = () => {
                 // @ts-ignore
                 navigation.navigate('SignUpScreen');
               }}>
-              <Text className="text-lg">Create an Account</Text>
+              <Text className="text-lg text-white">Create an Account</Text>
             </Button>
             <Button
               className="w-full py-2 bg-black rounded-xl mt-3"
@@ -38,6 +38,14 @@ const WelcomeScreen = () => {
                 navigation.navigate('LoginScreen');
               }}>
               <Text className="text-lg text-white">Login</Text>
+            </Button>
+            <Button
+              className="w-full py-2 bg-black rounded-xl mt-3"
+              onPress={() => {
+                // @ts-ignore
+                navigation.navigate('ConnectionScreen');
+              }}>
+              <Text className="text-lg text-white">Pair your device</Text>
             </Button>
           </View>
         </View>
