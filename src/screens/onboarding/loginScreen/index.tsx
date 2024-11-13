@@ -61,7 +61,7 @@ const LoginScreen = () => {
     try {
       setError('');
       const response = await axios.post(
-        'http://totstrackerserver.vercel.app/v1/users/login',
+        'https://totstrackerserver.vercel.app/v1/users/login',
         {email, password},
       );
       await AsyncStorage.setItem('token', response.data.token);

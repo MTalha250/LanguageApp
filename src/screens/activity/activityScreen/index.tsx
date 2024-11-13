@@ -22,7 +22,7 @@ const ActivityScreen = () => {
     try {
       const token = await AsyncStorage.getItem('token');
       const response = await axios.get(
-        'http://192.168.0.101:4000/v1/recordings/mine',
+        'https://totstrackerserver.vercel.app/v1/recordings/mine',
         {
           headers: {Authorization: `Bearer ${token}`},
         },

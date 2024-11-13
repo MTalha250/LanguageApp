@@ -22,7 +22,7 @@ const HomeScreen = () => {
   const fetchRecordings = async () => {
     try {
       const token = await AsyncStorage.getItem('token');
-      const response = await axios.get('http://192.168.0.101:4000/v1/recordings/mine', {
+      const response = await axios.get('https://totstrackerserver.fly.dev/v1/recordings/mine', {
         headers: { Authorization: `Bearer ${token}` }
       });
       setRecordings(response.data.recordings);
@@ -34,13 +34,20 @@ const HomeScreen = () => {
     }
   };
 
-  const totalWords = recordings.reduce((sum, recording:any) => sum + recording.wordCount, 0);
-  const uniqueWords = [...new Set(recordings.flatMap((recording:any) => recording.uniqueWords))];
+  const totalWords = recordings.reduce((sum, recording:any) => {
+    const wordCount = typeof recording?.wordCount === 'number' ? recording.wordCount : 0;
+    return sum + wordCount;
+  }, 0);
+
+  const uniqueWords = [...new Set(recordings.flatMap((recording:any) => recording?.uniqueWords || []))];
 
   const chartData = {
     labels: recordings.map((_, index) => `Day ${index + 1}`),
     datasets: [{
-      data: recordings.map((recording:any) => recording.wordCount)
+      data: recordings.map((recording:any) => {
+        const wordCount = typeof recording?.wordCount === 'number' ? recording.wordCount : 0;
+        return wordCount;
+      }).filter(count => !isNaN(count) && isFinite(count))
     }]
   };
 
@@ -66,9 +73,9 @@ const HomeScreen = () => {
       <View className="flex-row justify-between items-center px-6 py-3 border-b border-gray-200">
         <Text className="text-lg font-bold text-black ">Home</Text>
         <Icon 
-        onPress={()=>{
+        onPress={() => {
           //@ts-ignore
-          navigation.navigate('Notifications')
+          navigation.navigate('Notifications');
         }}
         name="bell" size={24} color="black" />
       </View>
@@ -103,28 +110,32 @@ const HomeScreen = () => {
                 <Text className="text-black">Details</Text>
               </Button>
             </View>
-            <LineChart
-              data={chartData}
-              width={300}
-              height={200}
-              chartConfig={{
-                backgroundColor: '#ffffff',
-                backgroundGradientFrom: '#ffffff',
-                backgroundGradientTo: '#ffffff',
-                decimalPlaces: 0,
-                color: (opacity = 1) => `rgba(39, 154, 241, ${opacity})`,
-                style: {
+            {chartData.datasets[0].data.length > 0 ? (
+              <LineChart
+                data={chartData}
+                width={300}
+                height={200}
+                chartConfig={{
+                  backgroundColor: '#ffffff',
+                  backgroundGradientFrom: '#ffffff',
+                  backgroundGradientTo: '#ffffff',
+                  decimalPlaces: 0,
+                  color: (opacity = 1) => `rgba(39, 154, 241, ${opacity})`,
+                  style: {
+                    borderRadius: 16
+                  }
+                }}
+                bezier
+                style={{
+                  marginVertical: 8,
                   borderRadius: 16
-                }
-              }}
-              bezier
-              style={{
-                marginVertical: 8,
-                borderRadius: 16
-              }}
-            />
+                }}
+              />
+            ) : (
+              <Text className="text-center text-gray-500 my-4">No data available for chart</Text>
+            )}
             <Text className="text-right text-sm text-gray-800 mt-2">
-              avg {(totalWords / recordings.length || 0).toFixed(1)} words
+              avg {(totalWords / (recordings.length || 1)).toFixed(1)} words
             </Text>
           </View>
         </Card>
