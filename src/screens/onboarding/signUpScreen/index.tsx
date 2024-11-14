@@ -59,7 +59,7 @@ const SignUpScreen = () => {
     try {
       setError('');
       const res = await axios.post(
-        'https://totstrackerserver.vercel.app/v1/users/register',
+        'https://totstrackerserver.fly.dev/v1/users/register',
         {
           name: 'user',
           email,

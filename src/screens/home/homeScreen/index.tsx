@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { View, ScrollView, Image, SafeAreaView } from 'react-native';
-import { Text, Avatar, Button, Card, ActivityIndicator } from 'react-native-paper';
+import { View, ScrollView, Image, SafeAreaView, Dimensions } from 'react-native';
+import { Text, Button, Card, ActivityIndicator } from 'react-native-paper';
 import { LineChart } from 'react-native-chart-kit';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -14,6 +14,7 @@ const HomeScreen = () => {
   const [isLoading, setIsLoading] = useState(true);
   const navigation = useNavigation();
   const [error, setError] = useState('');
+  const screenWidth = Dimensions.get('window').width;
 
   useEffect(() => {
     fetchRecordings();
@@ -41,8 +42,10 @@ const HomeScreen = () => {
 
   const uniqueWords = [...new Set(recordings.flatMap((recording:any) => recording?.uniqueWords || []))];
 
+  // Improve chart data formatting
   const chartData = {
-    labels: recordings.map((_, index) => `Day ${index + 1}`),
+    // Only show every 3rd label to reduce clutter
+    labels: recordings.map((_, index) => index % 3 === 0 ? `Day ${index + 1}` : ''),
     datasets: [{
       data: recordings.map((recording:any) => {
         const wordCount = typeof recording?.wordCount === 'number' ? recording.wordCount : 0;
@@ -71,13 +74,16 @@ const HomeScreen = () => {
   return (
     <SafeAreaView className="flex-1 bg-white">
       <View className="flex-row justify-between items-center px-6 py-3 border-b border-gray-200">
-        <Text className="text-lg font-bold text-black ">Home</Text>
+        <Text className="text-lg font-bold text-black">Home</Text>
         <Icon 
-        onPress={() => {
-          //@ts-ignore
-          navigation.navigate('Notifications');
-        }}
-        name="bell" size={24} color="black" />
+          onPress={() => {
+            //@ts-ignore
+            navigation.navigate('Notifications');
+          }}
+          name="bell" 
+          size={24} 
+          color="black" 
+        />
       </View>
       <ScrollView className="px-6 py-4">
         <View>
@@ -93,7 +99,7 @@ const HomeScreen = () => {
             <Image source={require('../../../assets/home1.png')} className="w-28 h-28" resizeMode="contain" />
           </View>
         </Card>
-        <Card className="mx-4 rounded-lg mx-0">
+        <Card className="rounded-lg mx-0">
           <View className="p-4 flex-row items-center justify-between bg-[#6EEB83] rounded-lg">
             <View>
               <Text className="text-2xl w-2/3 text-gray-800">Unique Words Learnt</Text>
@@ -113,7 +119,7 @@ const HomeScreen = () => {
             {chartData.datasets[0].data.length > 0 ? (
               <LineChart
                 data={chartData}
-                width={300}
+                width={screenWidth - 60}
                 height={200}
                 chartConfig={{
                   backgroundColor: '#ffffff',
@@ -121,6 +127,14 @@ const HomeScreen = () => {
                   backgroundGradientTo: '#ffffff',
                   decimalPlaces: 0,
                   color: (opacity = 1) => `rgba(39, 154, 241, ${opacity})`,
+                  propsForBackgroundLines: {
+                    strokeDasharray: '3, 3',
+                    strokeWidth: 1,
+                    stroke: 'rgba(0, 0, 0, 0.1)',
+                  },
+                  propsForLabels: {
+                    fontSize: 10,
+                  },
                   style: {
                     borderRadius: 16
                   }
@@ -130,6 +144,12 @@ const HomeScreen = () => {
                   marginVertical: 8,
                   borderRadius: 16
                 }}
+                withHorizontalLabels={true}
+                withVerticalLabels={true}
+                withDots={true}
+                withShadow={false}
+                withInnerLines={false}
+                fromZero
               />
             ) : (
               <Text className="text-center text-gray-500 my-4">No data available for chart</Text>
@@ -139,7 +159,7 @@ const HomeScreen = () => {
             </Text>
           </View>
         </Card>
-      <Text> </Text>
+        <Text> </Text>
       </ScrollView>
     </SafeAreaView>
   );

@@ -27,7 +27,7 @@ const App = () => {
   async function loginBack(token: any) {
     try {
       console.log('token', token);
-      const res = await axios.get('https://totstrackerserver.vercel.app/v1/users/login/back', {
+      const res = await axios.get('https://totstrackerserver.fly.dev/v1/users/login/back', {
         headers: {
           Authorization: `Bearer ${token}`,
         },

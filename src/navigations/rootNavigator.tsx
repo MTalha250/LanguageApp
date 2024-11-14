@@ -5,6 +5,7 @@ import LoginStackNavigation from './loginStackNavigation';
 import Feather from 'react-native-vector-icons/Feather';
 import HomeStackNavigation from './homeStackNavigation';
 import ActivityStackNavigation from './activityStackNavigation';
+import ProfileScreen from '../screens/profile';
 import NotificationStackNavigation from './notificationsStackNavigation';
 import useAuthStore from '../store/authStore';
 
@@ -58,7 +59,7 @@ const RootNavigator = () => {
         />
         <Tab.Screen
           name={'Account'}
-          component={user? LoginStackNavigation : LoginStackNavigation}
+          component={user? ProfileScreen : LoginStackNavigation}
           options={{
             tabBarIcon: ({color}) => (
               <Feather name="user" size={30} color={color} />
